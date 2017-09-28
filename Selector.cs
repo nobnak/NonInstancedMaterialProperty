@@ -5,7 +5,7 @@ using UnityEngine;
 namespace NonInstancedMaterialProperty {
 
     [System.Serializable]
-    public class Property {
+    public class Selector {
         public enum ValueTypeEnum { Texture = 0 }
 
         public string name;
@@ -13,11 +13,8 @@ namespace NonInstancedMaterialProperty {
 
         public Texture[] textureValues;
 
-        public void Set(Material m, int valueIndex) {
-            m.SetTexture(name, textureValues[valueIndex]);
-        }
-        public object Get(int valueIndex) {
-            return textureValues[valueIndex];
+        public MaterialProperty GenerateProperty(int valueIndex) {
+            return new TextureProperty(name, textureValues[valueIndex]);
         }
         public int CountValues {
             get {

@@ -7,10 +7,10 @@ namespace NonInstancedMaterialProperty {
     public class RandomTextureSetter : MonoBehaviour {
  
         [SerializeField]
-        MaterialPicker picker;
+        protected SelectionalPicker picker;
 
         #region Unity
-        void OnEnable() {
+        protected virtual void OnEnable() {
             var picker = Picker;
             var selections = new int[picker.CountProperties()];
             for (var i = 0; i < selections.Length; i++)
@@ -19,10 +19,10 @@ namespace NonInstancedMaterialProperty {
         }
         #endregion
 
-        public MaterialPicker Picker {
+        public virtual SelectionalPicker Picker {
             get {
                 if (picker == null)
-                    picker = GetComponent<MaterialPicker>();
+                    picker = GetComponent<SelectionalPicker>();
                 return picker;
             }
         }
