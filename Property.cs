@@ -16,6 +16,9 @@ namespace NonInstancedMaterialProperty {
         public void Set(Material m, int valueIndex) {
             m.SetTexture(name, textureValues[valueIndex]);
         }
+        public object Get(int valueIndex) {
+            return textureValues[valueIndex];
+        }
         public int CountValues {
             get {
                 return textureValues.Length;

@@ -6,12 +6,24 @@ namespace NonInstancedMaterialProperty {
 
     public class MaterialHolder {
 
+        #region Static
+        protected static MaterialHolder instance;
+
+        public static MaterialHolder Instance {
+            get {
+                if (instance == null)
+                    instance = new MaterialHolder();
+                return instance;
+            }
+        }
+        #endregion
+
         protected Dictionary<Tuple, Retainer<Material>> retainedMaterials;
 
         public MaterialHolder() {
             retainedMaterials = new Dictionary<Tuple, Retainer<Material>>();
         }
-        
+
         public Token<Material> Retain(Tuple key, System.Func<Material> valueGenerator) {
             Retainer<Material> ret;
             if (!retainedMaterials.TryGetValue(key, out ret))
