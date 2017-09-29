@@ -8,19 +8,19 @@ namespace NonInstancedMaterialProperty {
     public class Retainer<T> : System.IDisposable {
         public T Value { get; private set; }
 
-        protected System.Action<T> disposer;
+        protected System.Action<T> valueDisposer;
         protected int referenceCount = 0;
         protected bool disposed = false;
 
-        public Retainer(T value, System.Action<T> disposer) {
+        public Retainer(T value, System.Action<T> valueDisposer) {
             this.Value = value;
-            this.disposer = disposer;
+            this.valueDisposer = valueDisposer;
         }
 
         public void Dispose() {
             if (!disposed) {
                 disposed = true;
-                disposer(Value);
+                valueDisposer(Value);
             }
         }
 
