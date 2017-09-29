@@ -13,6 +13,14 @@ namespace NonInstancedMaterialProperty {
             this.Disposed = false;
         }
 
+        ~Token() {
+            if (!Disposed) {
+                Dispose();
+                Debug.LogError("Call Dispose instead");
+            }
+
+        }
+
         public T Value { get { return retainer.Value; } }
         public void Dispose() {
             if (!Disposed) {
