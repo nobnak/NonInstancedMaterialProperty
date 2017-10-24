@@ -5,8 +5,7 @@ using UnityEngine;
 namespace NonInstancedMaterialProperty {
 
     public class BasePicker : MonoBehaviour {
-        [SerializeField]
-        protected Material baseMaterial;
+        [SerializeField] protected Material baseMaterial;
 
         protected Token<Material> sharedMaterialToken;
 
@@ -27,7 +26,7 @@ namespace NonInstancedMaterialProperty {
             sharedMaterialToken = MaterialHolder.Instance.Retain(key, () => GenerateVariation(selectedProperties));
             Apply(sharedMaterialToken.Value);
         }
-
+        
         protected virtual void ReleaseToken() {
             if (sharedMaterialToken != null) {
                 sharedMaterialToken.Dispose();
