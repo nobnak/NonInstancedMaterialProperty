@@ -4,9 +4,9 @@ using UnityEngine;
 
 namespace NonInstancedMaterialProperty {
 
+    [RequireComponent(typeof(SelectionalPicker))]
     public class RandomTextureSetter : MonoBehaviour {
  
-        [SerializeField]
         protected SelectionalPicker picker;
 
         #region Unity
