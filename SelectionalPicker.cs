@@ -9,13 +9,19 @@ namespace NonInstancedMaterialProperty {
         protected Selector[] properties;
 
         public void Pick(params int[] propertyIndices) {
-            if (propertyIndices.Length < properties.Length) {
-                Debug.LogError("PropertyIncides array length is too short");
-                return;
-            }
             var variationalProperties = new MaterialProperty[properties.Length];
-            for (var i = 0; i < properties.Length; i++)
-                variationalProperties[i] = properties[i].GenerateProperty(propertyIndices[i]);
+            var pairCount = Mathf.Min(propertyIndices.Length, properties.Length);
+
+            var p = default(int);
+            for (var i = 0; i < pairCount; i++) {
+                p = propertyIndices[i];
+                variationalProperties[i] = properties[i].GenerateProperty(p);
+            }
+
+            for (var i = pairCount; i < properties.Length; i++)
+                variationalProperties[i] = properties[i].GenerateProperty(p);
+
+
             Pick(variationalProperties);
         }
 
